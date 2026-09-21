@@ -1,0 +1,61 @@
+# Exclude springai module for now
+springai/
+
+# Markdown notes / docs
+*.md
+**/*.md
+
+# Maven
+**/target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Local Maven JDK override
+**/.mvn/jdk.home
+
+# Environment / secrets
+.env
+.env.*
+*.pem
+*.key
+!.gitattributes
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# STS / Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# NetBeans
+**/nbproject/private/
+**/nbbuild/
+**/dist/
+**/nbdist/
+**/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# VS Code
+.vscode/
+
+# Logs / temp
+*.log
+*.tmp
+*.swp
+*~
