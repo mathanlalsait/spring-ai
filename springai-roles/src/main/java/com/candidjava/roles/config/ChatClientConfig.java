@@ -1,6 +1,7 @@
 package com.candidjava.roles.config;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,10 @@ public class ChatClientConfig {
                         kindly inform them that you can only assist with queries related to
                         HR policies.
                         """)
+                .defaultAdvisors(SimpleLoggerAdvisor.builder()
+                        .requestToString(PromptLogger::formatRequest)
+                        .responseToString(PromptLogger::formatResponse)
+                        .build())
                 .build();
     }
 }

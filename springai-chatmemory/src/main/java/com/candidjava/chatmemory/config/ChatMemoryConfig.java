@@ -38,15 +38,25 @@ public class ChatMemoryConfig {
     }
 
     /**
-     * ChatClient with:
-     * - SimpleLoggerAdvisor (request/response logging)
-     * - MessageChatMemoryAdvisor (loads/saves history for CONVERSATION_ID)
+     * Stateless client — no MessageChatMemoryAdvisor.
+     * Each call is an independent conversation (demo contrast).
      */
-    @Bean
-    public ChatClient chatClient(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory) {
+    @Bean("noMemoryChatClient")
+    public ChatClient noMemoryChatClient(ChatClient.Builder chatClientBuilder) {
+        log.info("Creating ChatClient WITHOUT memory (stateless) — SimpleLoggerAdvisor only");
+        return chatClientBuilder
+                .defaultAdvisors(new SimpleLoggerAdvisor())
+                .build();
+    }
+
+    /**
+     * Stateful client — remembers prior turns for a CONVERSATION_ID.
+     */
+    @Bean("chatMemoryChatClient")
+    public ChatClient chatMemoryChatClient(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory) {
         Advisor loggerAdvisor = new SimpleLoggerAdvisor();
         Advisor memoryAdvisor = MessageChatMemoryAdvisor.builder(chatMemory).build();
-        log.info("Creating ChatClient with advisors: SimpleLoggerAdvisor + MessageChatMemoryAdvisor");
+        log.info("Creating ChatClient WITH memory — SimpleLoggerAdvisor + MessageChatMemoryAdvisor");
         return chatClientBuilder
                 .defaultAdvisors(List.of(loggerAdvisor, memoryAdvisor))
                 .build();

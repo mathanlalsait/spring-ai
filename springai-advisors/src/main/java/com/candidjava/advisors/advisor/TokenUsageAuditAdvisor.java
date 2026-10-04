@@ -14,8 +14,14 @@ public class TokenUsageAuditAdvisor implements CallAdvisor {
     private static final Logger logger = LoggerFactory.getLogger(TokenUsageAuditAdvisor.class);
 
     @Override
-    public ChatClientResponse adviseCall(ChatClientRequest chatClientRequest, CallAdvisorChain callAdvisorChain) {
+    public ChatClientResponse adviseCall(ChatClientRequest chatClientRequest, 
+        CallAdvisorChain callAdvisorChain) 
+        {
+
+
+
         ChatClientResponse chatClientResponse = callAdvisorChain.nextCall(chatClientRequest);
+       
         ChatResponse chatResponse = chatClientResponse.chatResponse();
         if (chatResponse.getMetadata() != null) {
             Usage usage = chatResponse.getMetadata().getUsage();
