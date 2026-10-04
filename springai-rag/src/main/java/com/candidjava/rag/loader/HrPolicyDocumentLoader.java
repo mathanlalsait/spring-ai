@@ -47,5 +47,6 @@ public class HrPolicyDocumentLoader {
                 .toList();
         vectorStore.add(chunks);
         log.info("Loaded HR policy into VectorStore as {} chunks (Lesson B/PII, source={})", chunks.size(), SOURCE);
+        
     }
 }

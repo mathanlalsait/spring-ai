@@ -50,6 +50,7 @@ public class DocumentFormatsLoader {
         all.addAll(readDocx(splitter));
         vectorStore.add(all);
         log.info("Loaded {} chunks from PDF+DOCX into VectorStore (Lesson C, source={})", all.size(), SOURCE);
+        
     }
 
     private List<Document> readPdf(TextSplitter splitter) {
